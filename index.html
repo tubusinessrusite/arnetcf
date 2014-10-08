@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--[if IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]--> 
+        <title>Top Union Business</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/jquery.bxslider.css" rel="stylesheet">
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/prettyPhoto.css" rel="stylesheet" type="text/css"/>
+        <link href="css/main.css" rel="stylesheet" >
+       
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <link href="css/media.css" rel="stylesheet" media="screen">
+
+        <script type="text/javascript" src="js/modernizr-2.6.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
+        <script type="text/javascript" src="js/jquery.scrollTo-1.4.2-min.js"></script>
+        <script type="text/javascript" src="js/jquery.localscroll-1.2.7-min.js"></script>
+        <script type="text/javascript" src="js/jquery.nav.js"></script>
+
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.backstretch.min.js"></script>
+        <script type="text/javascript" src="js/jquery.bxslider.js"></script>
+        <script type="text/javascript" src="js/jquery.ba-dotimeout.js"></script>
+        <script type="text/javascript" src="js/jquery.quicksand.js"></script>
+        <script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="js/prefixfree.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+
+    </head>
+    <body>
+
+        <div id="banner">
+                    <!-- @start -->
+
+             <script>   
+                        function mailerPost(self) { 
+                            var input = $('#mailer').serializeArray();  
+                            // console.log(input);
+                            var i = 0;
+                            $.each( input, function( key, value ) {  
+                                // console.log($("#" + value . name).attr('title') );
+                                if ( $("#" + value . name).attr('title') != undefined ) {
+                                    // console.log(value.value);
+                                    // console.log ( $("#" + value . name).attr('title'), value.value );
+                                    // $("#" + value . name).attr('title')  
+                                    if (  "" == value.value ) {
+                                        // console.log($("#" + value . name).attr('title'));
+                                        // alert(2);
+                                        // error 
+                                        if ($("#" + value . name).attr('data-error') != undefined )
+                                            if (i == 0)  {
+                                                // alert(1);
+                                                alert($("#" + value . name).attr('data-error'));
+                                                $("#" + value . name).addClass('inputError');
+                                                //inputfield error
+                                                i = 1;
+                                                return;
+                                            } else {
+                                                $("#" + value . name).removeClass('inputError');
+                                            }
+                                    }
+                                 
+                                } 
+                            });
+
+                            if(i == 0)  {
+                                $("#loadId").html('<br /> <img src="img/loading.gif"/>');
+                                $.post('mail.php', input ,function(data) { 
+                                    var d =  jQuery.parseJSON( data ); 
+                                    $('#form').html(d.result); 
+                                   document.getElementById('contact_frame').style.marginTop="100px";
+                                });  
+                            } 
+                        }
+                    </script>
+         
+
+ 
+        <script id="templateForm_1" type="text/template">
+                <!-- div id="contact_frame_top"></div -->
+                <div id="form">
+                    <p>Доставка товаров</p>
+                     
+                    <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">
+                         <div id="input">
+                            <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
+                            <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
+                            <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
+                            <input name="town-out"  id="town-out"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город отправитель"    data-error='Укажите город отправитель, пожалуйста.' title="Город отправитель"  value="" type="text" /><br />
+                            <input name="town-in"  id="town-in"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город получатель"    data-error='Укажите город получатель, пожалуйста.' title="Город получатель"  value="" type="text" /><br /> 
+                            <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
+                            <select name="type" size="1" style="width:233px">
+                            <option value="first">авиа</option>
+                            <option selected="selected" value="second">авто</option>
+                            <option value="third">ж/д</option>
+                            <option value="fourth">море</option>
+                            </select>
+                            <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
+                        </div>
+                    </form>
+                </div>
+                <!-- div id="contact_frame_bottom"></div -->
+        </script>  
+  
+        <script id="templateForm_2" type="text/template">
+                <!-- div id="contact_frame_top"></div -->
+                <div id="form">
+                    <p>Поиск товаров и производителей</p>
+                    <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">    
+                        <div id="input">
+                            <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
+                            <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
+                            <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
+                            <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
+                            <textarea name="text"  id="textarea" class="inputtextfield"      onfocus = "this.classList.remove('inputError');" placeholder="Ваши комментарии к заявке"   title="Ваши комментарии к заявке"></textarea>
+                            <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
+                        </div>
+                    </form>
+                </div>
+                <!-- div id="contact_frame_bottom"></div -->
+        </script>  
+
+            <style> 
+                #contact_frame {
+                    width: 300px;
+                    background: #e17101;
+                    position: relative;
+                    opacity:0.9;
+                    top: 17%;
+                   /* left: 73%; */
+                    border-radius: 10px;
+                    z-index: 20;
+                    position: absolute; right: 20px; 
+                   /* margin-top: 100px;*/
+                }
+                #contact_frame_top {
+                    position: relative;
+                    width: 167px;
+                    height: 26px;
+                    top: -10px;
+                    left: 65px;
+                    background: url("../images/top.png");
+                    background-repeat: no-repeat;
+                    margin: 0;
+                }
+                #form {
+                    width: 280px;
+                    margin-right: auto;
+                    margin-left: auto;
+                    color: #ffffff;
+                    font-size: 12px;
+                    text-align: center;
+                    font-weight: 100;
+                    border-collapse: collapse;
+                }
+                 #form p{
+                    color: #ffffff;
+                    font-size: 17px;
+                    text-align: center;
+                    font-weight: 100;
+                    margin-bottom: 13px;
+                }
+                #contact_frame_bottom {
+                    position: relative;
+                    top: 9px;
+                    left: 65px;
+                    background: url("../images/bottom.png");
+                    background-repeat: no-repeat;
+                    width: 167px;
+                    height: 26px;
+                }
+                .inputtextfield {
+                    width: 220px;
+                    line-height: 25px;
+                    height: 25px;
+                    background: #fff;
+                    color: #a9a9a9;
+                    border-collapse: collapse;
+                    border: 1px solid #898989;
+                    border-radius: 4px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    margin-bottom: 7px;
+                }
+
+                .inputfield {
+                    width: 220px;
+                    height: 22px;
+                    line-height: 25px;
+                    background: #3f5a74;
+                    color: #a9a9a9;
+                   /* border-collapse: collapse;*/
+                    /* border: 1px solid #898989; */
+                    border-radius: 4px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    margin-bottom: 7px;
+                }
+
+                input.inputError {
+                  border: 1px solid red;
+                }
+
+                textarea.inputError {
+                  border: 1px solid red;
+                }
+				.buttontextfield {
+				background: #ffffff;
+				color: #e17101;
+				display: inline-block;
+				font-family: 'Proxima Nova Rg';
+				font-size: 20px;
+				line-height: 29px;
+				padding: 7px 30px;
+				border: 3px solid;
+				border-color: #e17101;
+				border-radius: 10px;
+				margin-top:5px;
+				}
+				.buttontextfield:hover{
+				background: #e17101; 
+				color: #ffffff; 
+				border: 3px solid; 
+				border-color:#ffffff;}
+             </style>
+
+
+            <div id="contact_frame">
+        <ul class="nav nav-tabs" role="tablist" >
+          <li class="active" style="width: 151px; text-align: center;"><a href="#home" role="tab" data-toggle="tab" onclick="$('#TabsСreate').html($('#templateForm_1').html());" >ДОСТАВКА</a></li>
+          <li style="width: 149px; text-align: center;"><a style="margin-right:0;" href="#profile" role="tab" data-toggle="tab" onclick="$('#TabsСreate').html($('#templateForm_2').html());">ПОИСК</a></li> 
+        </ul> 
+        <div id="TabsСreate"></div><br />
+            </div>
+
+
+             
+
+            <script>
+                var use_ajax_form = true;
+            </script>   
+            <script>
+             $(function() {
+            $('#TabsСreate').html($('#templateForm_1').html());
+             });  
+            </script> 
+
+
+            <!-- @end -->
+        
+        
+            <div class="site-slogan">
+                <div class="slogan-inner clearfix">
+                    <img src="images/logo.png" />
+                </div>
+            </div>           
+        </div>
+        <!-- END OF HOME -->
+
+        <div id="home">
+            <div class="wrapper clearfix">
+                <section class="welcome-head row-fluid">
+                    <div class="welcome-box row-fluid">
+                        <span class="wc-text-box-1">Грузовые перевозки по России и всему миру</span>
+                    </div>
+                    <h3>Логистическая компания «Топ Юнион Бизнес» осуществляет большое количество услуг, которые включают морские, автомобильные, железнодорожные, мультимодальные и авиаперевозки грузов любого типа по территории Российской Федерации, СНГ, Европе и всему миру. Помимо непосредственных перевозок компания оказывает широкий спектр дополнительных услуг таких, как негабаритные перевозки, доставка «от двери к двери», сертификация, страхование, таможенное оформление, экспедирование, финансовое сопровождение и поиск поставщиков.</h3>
+                </section>
+
+                <div class="feature-box row-fluid">
+                    <!--<p>Featuring</p>-->
+                    <div class="feature-list-box row-fluid">
+                        <ul class="feature-list">
+                            <li>
+                                <div class="feature-item">
+                                    <div class="feature-text row-fluid">
+                                        <h4 style="margin-top:12px;">СБОРНЫЕ ГРУЗЫ</h4>
+                                        <!--<p>Ipsum sed pharetra orn lre ero uisque utredg neque sit amet eros</p>-->
+                                    </div>
+
+                                    <div class="ft-top-box">
+                                        <span class="ft-top-icon">
+                                            <span class="icon-list-alt feature-icon"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="feature-item">
+                                    <div class="feature-text row-fluid">
+                                        <h4>КОНТЕЙНЕРНЫЕ ПЕРЕВОЗКИ</h4>
+                                    </div>
+
+                                    <div class="ft-top-box">
+                                        <span class="ft-top-icon">
+                                            <span class="icon-anchor feature-icon"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="margin-right:0">
+                                <div class="feature-item">
+                                    <div class="feature-text row-fluid">
+                                        <h4 style="margin-top:12px;">АВИА ПЕРЕВОЗКИ</h4>
+                                    </div>
+
+                                    <div class="ft-top-box">
+                                        <span class="ft-top-icon">
+                                            <span class="icon-plane feature-icon"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="feature-item">
+                                    <div class="feature-text row-fluid">
+                                        <h4 style="margin-top:12px;">АВТО ПЕРЕВОЗКИ</h4>
+                                    </div>
+
+                                    <div class="ft-top-box">
+                                        <span class="ft-top-icon">
+                                            <span class="icon-truck feature-icon"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="feature-item">
+                                    <div class="feature-text row-fluid">
+                                        <h4>ПОИСК ПОСТАВЩИКОВ<br /> И ТОВАРОВ В КИТАЕ</h4>
+                                    </div>
+
+                                    <div class="ft-top-box">
+                                        <span class="ft-top-icon">
+                                            <span class="icon-search feature-icon"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="margin-right:0">
+                                <div class="feature-item">
+                                    <div class="feature-text row-fluid">
+                                        <h4>ПОЛНОЕ УПРАВЛЕНИЕ ПОСТАВКАМИ</h4>
+                                    </div>
+
+                                    <div class="ft-top-box">
+                                        <span class="ft-top-icon">
+                                            <span class="icon-sitemap feature-icon"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <!-- END OF BANNER -->
+
+        <div id="parallax_1" class="parallax-section">
+            <div class="parallax-box">
+                <div class="wrapper clearfix">
+                    <div class="parallax_box_1">
+                        <h2><span class="text_1">В штате компании работают только высококвалифицированные логисты, менеджеры и юристы. Доверив работу профессионалам, вы сможете быть уверены, что груз будет доставлен в целости и в срок.</span></h2>
+                        
+                        <a href="#" title="BUY THIS HTML">Оставить заявку на доставку или поиск товара</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- структура работы -->
+        <div id="process">
+        <div class="row-fluid working-process">
+                 <div id="how">
+                     <div class="wrap">
+                     <h1 class="title">Схема работы</h1>
+                
+                    <div class="cont"><p style="color: #e17101; font-size:22px;"><span style="text-decoration: underline; margin-right:100px;">Доставка</span><span>Поиск товаров и услуг</span></p></div>
+                
+                
+                    <ul class="ul_block">
+                    <li><span class="num">1</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
+                    <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Составляем подробную смету и заключаем договор</span></span></li>
+                    <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Доставляем груз из Китая в Россию</span></span></li>
+                    <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Таможенное оформление</span></span></li>
+                    <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Груз приходит к вам на склад</span></span></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+<!-- Преимущества -->
+        <div id="service">
+            <section class="header-section">
+                <div class="wrapper header-box clearfix">
+                    <h1 class="title">Преимущества</h1>
+                    <div class="row-fluid">
+                        <ul class="parallax_box_2">
+                            <li>
+                                <div class="clearfix inner-box">
+                                    <span class="wc-dot-box"><i class="icon-rocket"></i></span>
+                                    <div class="pr-dot-text">
+                                        <p>ВСЕ СХЕМЫ ДОСТАВКИ ГРУЗА</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="clearfix inner-box">
+                                    <span class="wc-dot-box"><i class="icon-resize-full"></i></span>
+                                    <div class="pr-dot-text">
+                                        <p>ЛЮБОЙ ВЕС И ОБЪЕМ</p>
+                                    </div>
+                               </div>
+                            </li>
+                            <li>
+                                <div class="clearfix inner-box">
+                                    <span class="wc-dot-box"><i class="icon-location-arrow"></i></span>
+                                    <div class="pr-dot-text">
+                                        <p>ОТСЛЕЖИВАНИЕ ГРУЗА</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="clearfix inner-box">
+                                    <span class="wc-dot-box"><i class="icon-user"></i></span>
+                                    <div class="pr-dot-text">
+                                        <p>ИНДИВИДУАЛЬНЫЙ ПОДХОД К КАЖДОМУ КЛИЕНТУ</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="clearfix inner-box">
+                                    <span class="wc-dot-box"><i class="icon-cogs "></i></span>
+                                    <div class="pr-dot-text">
+                                        <p>ОГРОМНЫЙ ОПЫТ РАБОТЫ</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="clearfix inner-box">
+                                    <span class="wc-dot-box"><i class=" icon-list"></i></span>
+                                    <div class="pr-dot-text">
+                                        <p>ОБШИРНАЯ БАЗА ПРОИЗВОДИТЕЛЕЙ ПО ВСЕЙ ЮГО-ВОСТОЧНОЙ АЗИИ</p>
+                                    </div>
+                                </div>
+                            </li>                                                        
+                        </ul>
+                    </div>
+                    <div class="dot-box">
+                        <img src="images/logo-sm.png">
+                    </div>
+                </div>
+            </section>
+
+            
+        </div>
+
+        <!-- END OF SERVICE -->
+
+
+
+        
+
+
+        <div id="contact">
+                <div id="parallax_2" class="parallax-section">
+            <div class="parallax-box">
+                <div class="wrapper clearfix">
+                    <div class="parallax_box_3">
+                        <h2><img src="images/logo-sm.png"></h2>
+                        <h1 class="title">Контактная информация</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="contact-box row-fluid">
+                <div class="wrapper clearfix">
+                    <div class="address-box row-fluid">
+                        <div class="marker">
+                            <span class="icon">&#xe012;</span>
+                        </div>
+                        <p>ОФИС В ГУАНЧЖОУ</p>
+                    </div>
+                    <div class="contact-frm-box clearfix">
+                    <form id="contactForm" action="" name="input" method="post">
+                        <div class="row-fluid">
+                            <input type="text" id="formName" class="input-box" name="name" placeholder="NAME*" value=""/>
+                            <input type="text" id="formEmail" class="input-box-2" name="email" placeholder="EMAIL*" value=""/>
+                        </div>
+                        <div class="row-fluid">
+                            <input type="text" class="input-box" name="phone" placeholder="PHONE" value=""/>
+                            <input type="text" class="input-box-2" name="website" placeholder="WEBSITE" value=""/>
+                        </div>
+                        <div class="row-fluid">
+                            <textarea name="message" id="message" placeholder="MESSAGE"></textarea>
+                        </div>
+                        <div class="error-holder">
+                            <p id="error-name"><span><i class="icon-off"></i></span>Please Enter Your Name</p>
+                            <p id="error-email"><span><i class="icon-off"></i></span>Please Enter Your Valid Email</p>
+                            <p id="error-sms"><span><i class="icon-off"></i></span>Please Write Message</p>
+                            <p id="failed"><span><i class="icon-off"></i></span>Email was not sent.</p>
+                        </div>
+                        <div class="row-fluid">
+                            <input id="formSubmit" type="submit" class="sttyc" name="submit" value="SEND">
+                        </div>
+                        </form>
+                        <h2 id="success">Email Sent Successfully</h2>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <!-- END OF CONTACT -->
+
+        <footer id="footer">
+            <div class="wrapper clearfix">
+                <div class="footer-box">
+                    <img src="images/logo-sm.png" style="margin-bottom:10px;"><br/>
+                    <div class="ft-text-box">
+                        <p>TOP UNION BUSINESS & Co LTD &#169; 2007-2014</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div id="main-nav" class="clearfix">
+            <div class="wrapper clearfix">
+                <div class="clearfix">
+                    
+                    <a class="scroll siteLogo" href="#banner">
+                        <span><img src="images/logo-sm.png" />
+                        </span>
+                    </a>
+                    <ul class="navigation hidden-phone">
+                        <li><a class="scroll" href="#banner" style="margin-right:15px; color:#e17101;">Запрос</a></li>
+						<li><a class="scroll" href="#home">О нас</a></li>
+						<li><a class="scroll" href="#process">Схема работы</a></li>
+						<li><a class="scroll" href="#service">Преимущества</a></li>
+						<li><a class="scroll" href="#contact">Контакты</a></li>
+                    </ul>
+                    <div class="mini-navigation visible-phone ">
+                        <button class="btn nav-toggole" type="button">
+                            <span><i class="icon-align-justify"></i></span>
+                        </button>
+                    </div>
+                                        
+                </div>
+            </div>
+            <div class="clearfix hidden-desktop hidden-tablet">
+                <ul class="phone-menu">
+                    <li><a class="scroll" href="#banner">Запрос</a></li>
+                    <li><a class="scroll" href="#home">О нас</a></li>
+                    <li><a class="scroll" href="#process">Схема работы</a></li>
+                    <li><a class="scroll" href="#service">Услуги</a></li>
+                    <li><a class="scroll" href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+              
+    </body>
+</html>
