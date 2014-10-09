@@ -36,99 +36,101 @@
         <script type="text/javascript" src="js/prefixfree.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
 
+
+
+        <script type="text/javascript">
+        App = {
+            init : function(){
+                $('#echoProcess').html($('#echoProcessTemplate_1').html());
+                $('#TabsСreate').html($('#templateForm_1').html()); 
+                $('.carousel').carousel()
+            } 
+        }
+        </script>
+
     </head>
     <body>
 
         <div id="banner">
-                    <!-- @start -->
-
-             <script>   
-                        function mailerPost(self) { 
-                            var input = $('#mailer').serializeArray();  
-                            // console.log(input);
-                            var i = 0;
-                            $.each( input, function( key, value ) {  
-                                // console.log($("#" + value . name).attr('title') );
-                                if ( $("#" + value . name).attr('title') != undefined ) {
-                                    // console.log(value.value);
-                                    // console.log ( $("#" + value . name).attr('title'), value.value );
-                                    // $("#" + value . name).attr('title')  
-                                    if (  "" == value.value ) {
-                                        // console.log($("#" + value . name).attr('title'));
-                                        // alert(2);
-                                        // error 
-                                        if ($("#" + value . name).attr('data-error') != undefined )
-                                            if (i == 0)  {
-                                                // alert(1);
-                                                alert($("#" + value . name).attr('data-error'));
-                                                $("#" + value . name).addClass('inputError');
-                                                //inputfield error
-                                                i = 1;
-                                                return;
-                                            } else {
-                                                $("#" + value . name).removeClass('inputError');
-                                            }
+            <!-- @start -->
+            <script>   
+                function mailerPost(self) { 
+                    var input = $('#mailer').serializeArray();  
+                    // console.log(input);
+                    var i = 0;
+                    $.each( input, function( key, value ) { 
+                        if ( $("#" + value . name).attr('title') != undefined ) {  
+                            if (  "" == value.value ) {
+                                if ($("#" + value . name).attr('data-error') != undefined )
+                                    if (i == 0)  {
+                                        // alert(1);
+                                        alert($("#" + value . name).attr('data-error'));
+                                        $("#" + value . name).addClass('inputError');
+                                        //inputfield error
+                                        i = 1;
+                                        return;
+                                    } else {
+                                        $("#" + value . name).removeClass('inputError');
                                     }
-                                 
-                                } 
-                            });
+                            }
+                         
+                        } 
+                    });
+                    if(i == 0)  {
+                        $("#loadId").html('<br /> <img src="img/loading.gif"/>');
+                        $.post('mail.php', input ,function(data) { 
+                            var d =  jQuery.parseJSON( data ); 
+                            $('#form').html(d.result); 
+                           document.getElementById('contact_frame').style.marginTop="100px";
+                        });  
+                    } 
+                }
+            </script> 
+            <script id="templateForm_1" type="text/template">
+                    <!-- div id="contact_frame_top"></div -->
+                    <div id="form">
+                        <p>Доставка товаров</p>
+                         
+                        <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">
+                             <div id="input">
+                                <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
+                                <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
+                                <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
+                                <input name="town-out"  id="town-out"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город отправитель"    data-error='Укажите город отправитель, пожалуйста.' title="Город отправитель"  value="" type="text" /><br />
+                                <input name="town-in"  id="town-in"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город получатель"    data-error='Укажите город получатель, пожалуйста.' title="Город получатель"  value="" type="text" /><br /> 
+                                <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
+                                <select name="type" size="1" style="width:233px">
+                                <option value="first">авиа</option>
+                                <option selected="selected" value="second">авто</option>
+                                <option value="third">ж/д</option>
+                                <option value="fourth">море</option>
+                                </select>
+                                <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- div id="contact_frame_bottom"></div -->
+            </script>  
 
-                            if(i == 0)  {
-                                $("#loadId").html('<br /> <img src="img/loading.gif"/>');
-                                $.post('mail.php', input ,function(data) { 
-                                    var d =  jQuery.parseJSON( data ); 
-                                    $('#form').html(d.result); 
-                                   document.getElementById('contact_frame').style.marginTop="100px";
-                                });  
-                            } 
-                        }
-                    </script>
-         
-
+            <script id="templateForm_2" type="text/template">
+                    <!-- div id="contact_frame_top"></div -->
+                    <div id="form">
+                        <p>Поиск товаров и производителей</p>
+                        <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">    
+                            <div id="input">
+                                <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
+                                <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
+                                <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
+                                <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
+                                <textarea name="text"  id="textarea" class="inputtextfield"      onfocus = "this.classList.remove('inputError');" placeholder="Ваши комментарии к заявке"   title="Ваши комментарии к заявке"></textarea>
+                                <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- div id="contact_frame_bottom"></div -->
+            </script> 
  
-        <script id="templateForm_1" type="text/template">
-                <!-- div id="contact_frame_top"></div -->
-                <div id="form">
-                    <p>Доставка товаров</p>
-                     
-                    <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">
-                         <div id="input">
-                            <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
-                            <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
-                            <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
-                            <input name="town-out"  id="town-out"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город отправитель"    data-error='Укажите город отправитель, пожалуйста.' title="Город отправитель"  value="" type="text" /><br />
-                            <input name="town-in"  id="town-in"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город получатель"    data-error='Укажите город получатель, пожалуйста.' title="Город получатель"  value="" type="text" /><br /> 
-                            <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
-                            <select name="type" size="1" style="width:233px">
-                            <option value="first">авиа</option>
-                            <option selected="selected" value="second">авто</option>
-                            <option value="third">ж/д</option>
-                            <option value="fourth">море</option>
-                            </select>
-                            <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
-                        </div>
-                    </form>
-                </div>
-                <!-- div id="contact_frame_bottom"></div -->
-        </script>  
-  
-        <script id="templateForm_2" type="text/template">
-                <!-- div id="contact_frame_top"></div -->
-                <div id="form">
-                    <p>Поиск товаров и производителей</p>
-                    <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">    
-                        <div id="input">
-                            <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
-                            <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
-                            <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
-                            <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
-                            <textarea name="text"  id="textarea" class="inputtextfield"      onfocus = "this.classList.remove('inputError');" placeholder="Ваши комментарии к заявке"   title="Ваши комментарии к заявке"></textarea>
-                            <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
-                        </div>
-                    </form>
-                </div>
-                <!-- div id="contact_frame_bottom"></div -->
-        </script>  
+ 
 
             <style> 
                 #contact_frame {
@@ -250,9 +252,9 @@
                 var use_ajax_form = true;
             </script>   
             <script>
-             $(function() {
-            $('#TabsСreate').html($('#templateForm_1').html());
-             });  
+            // $(function() {
+            //     $('#TabsСreate').html($('#templateForm_1').html());
+            // });  
             </script> 
 
 
@@ -384,19 +386,49 @@
         <div id="process">
         <div class="row-fluid working-process">
                  <div id="how">
-                     <div class="wrap">
-                     <h1 class="title">Схема работы</h1>
-                
-                    <div class="cont"><p style="color: #e17101; font-size:22px;"><span style="text-decoration: underline; margin-right:100px;">Доставка</span><span>Поиск товаров и услуг</span></p></div>
-                
-                
-                    <ul class="ul_block">
-                    <li><span class="num">1</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
-                    <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Составляем подробную смету и заключаем договор</span></span></li>
-                    <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Доставляем груз из Китая в Россию</span></span></li>
-                    <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Таможенное оформление</span></span></li>
-                    <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Груз приходит к вам на склад</span></span></li>
-                    </ul>
+                         <div class="wrap">
+                         <h1 class="title" style="margin: 90px 0 25px;
+font-family: 'Proxima Nova Rg';
+color: #e17101;   ">Схема работы</h1> 
+                        <div id="team__carousel" class="carousel slide" data-ride="carousel" data-interval="1000">
+                            <div class="cont">
+                                <a  id='runId' href="#team__carousel" role="button" data-slide="prev" style="color: #e17101; font-size:22px;">
+                                    Доставка
+                                </a>
+                                <a   href="#team__carousel" role="button" data-slide="next" style="color: #e17101; font-size:22px; padding-left: 28px;">
+                                    Поиск товаров и услуг
+                                </a>                         
+                            </div> 
+                            
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">  
+                                <div class="item active">
+                                    <div class="cover-container">
+                                        <ul class="ul_block">
+                                            <li><span class="num">[1]</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
+                                            <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Составляем подробную смету и заключаем договор</span></span></li>
+                                            <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Доставляем груз из Китая в Россию</span></span></li>
+                                            <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Таможенное оформление</span></span></li>
+                                            <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Груз приходит к вам на склад</span></span></li>
+                                        </ul> 
+                                    </div>
+                                </div>  
+                                <div class="item ">
+                                    <div class="cover-container"> 
+                                        <ul class="ul_block">
+                                            <li><span class="num">1</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
+                                            <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Составляем подробную смету и заключаем договор</span></span></li>
+                                            <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Доставляем груз из Китая в Россию</span></span></li>
+                                            <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Таможенное оформление</span></span></li>
+                                            <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Груз приходит к вам на склад</span></span></li>
+                                        </ul>
+                                    </div>
+                                </div>  
+                            </div>
+                        <!-- Controls -->                
+                        </div>  
+                        <!-- @end   -->
+
                     </div>
                 </div>
             </div>
@@ -568,6 +600,41 @@
                 </ul>
             </div>
         </div>
+        <script>
+        $( document ).ready(function() {
+            App.init();
+            console.log( "ready!" );
+        });
+        </script>
               
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
