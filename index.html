@@ -35,22 +35,38 @@
         <script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="js/prefixfree.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-
-
-
+ 
         <script type="text/javascript">
         App = {
+            target_on  : function(){  return document.getElementsByClassName('item active')[0].getAttribute("target-id") },
+            target_all : function(){  return document.getElementsByClassName('item') },
             init : function(){
                 $('#echoProcess').html($('#echoProcessTemplate_1').html());
                 $('#TabsСreate').html($('#templateForm_1').html()); 
-                $('.carousel').carousel()
+                $("#id_2").css("text-decoration","underline");// start                 
+                $('.carousel').carousel({
+                    interval: 5000
+                }).on('slide', function (e) {
+                    // console.log(55)
+                    var xx = $(this);  
+                    $("#"+App.target_on()).css("text-decoration","underline");
+                    for (var i = App.target_all().length - 1; i >= 0; i--) {
+                          // console.log(App.target_on() , App.target_all()[i].getAttribute("target-id"))
+                          // console.log(App.target_on() == App.target_all()[i].getAttribute("target-id"))
+                        if ( App.target_on() == App.target_all()[i].getAttribute("target-id") ) {
+                            $("#"+App.target_on()).css("text-decoration","underline");
+                        } else {
+                            $("#"+ App.target_all()[i].getAttribute("target-id") ).css("text-decoration","none");
+                        } 
+                    };
+                    // console.log(2) ; 
+                });
             } 
-        }
+        } 
         </script>
 
     </head>
     <body>
-
         <div id="banner">
             <!-- @start -->
             <script>   
@@ -244,22 +260,10 @@
         </ul> 
         <div id="TabsСreate"></div><br />
             </div>
-
-
-             
-
             <script>
                 var use_ajax_form = true;
-            </script>   
-            <script>
-            // $(function() {
-            //     $('#TabsСreate').html($('#templateForm_1').html());
-            // });  
-            </script> 
-
-
-            <!-- @end -->
-        
+            </script>            
+            <!-- @end -->       
         
             <div class="site-slogan">
                 <div class="slogan-inner clearfix">
@@ -392,17 +396,17 @@ font-family: 'Proxima Nova Rg';
 color: #e17101;   ">Схема работы</h1> 
                         <div id="team__carousel" class="carousel slide" data-ride="carousel" data-interval="1000">
                             <div class="cont">
-                                <a  id='runId' href="#team__carousel" role="button" data-slide="prev" style="color: #e17101; font-size:22px;">
+                                <a  id='id_1' href="#team__carousel" role="button" data-slide="prev" style=" font-size:22px; color: #e17101;">
                                     Доставка
                                 </a>
-                                <a   href="#team__carousel" role="button" data-slide="next" style="color: #e17101; font-size:22px; padding-left: 28px;">
+                                <a  id='id_2' href="#team__carousel" role="button" data-slide="next" style=" font-size:22px;  color: #e17101; padding-left: 28px;">
                                     Поиск товаров и услуг
                                 </a>                         
                             </div> 
                             
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">  
-                                <div class="item active">
+                                <div class="item active" target-id="id_1" >
                                     <div class="cover-container">
                                         <ul class="ul_block">
                                             <li><span class="num">[1]</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
@@ -413,7 +417,7 @@ color: #e17101;   ">Схема работы</h1>
                                         </ul> 
                                     </div>
                                 </div>  
-                                <div class="item ">
+                                <div class="item" target-id="id_2" >
                                     <div class="cover-container"> 
                                         <ul class="ul_block">
                                             <li><span class="num">1</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
@@ -500,11 +504,7 @@ color: #e17101;   ">Схема работы</h1>
             
         </div>
 
-        <!-- END OF SERVICE -->
-
-
-
-        
+        <!-- END OF SERVICE -->        
 
 
         <div id="contact">
@@ -569,8 +569,7 @@ color: #e17101;   ">Схема работы</h1>
 
         <div id="main-nav" class="clearfix">
             <div class="wrapper clearfix">
-                <div class="clearfix">
-                    
+                <div class="clearfix">                    
                     <a class="scroll siteLogo" href="#banner">
                         <span><img src="images/logo-sm.png" />
                         </span>
@@ -605,36 +604,6 @@ color: #e17101;   ">Схема работы</h1>
             App.init();
             console.log( "ready!" );
         });
-        </script>
-              
+        </script>              
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
