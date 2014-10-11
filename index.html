@@ -14,7 +14,7 @@
         <link href="css/font-awesome.css" rel="stylesheet">
         <link href="css/prettyPhoto.css" rel="stylesheet" type="text/css"/>
         <link href="css/main.css" rel="stylesheet" >
-       
+
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="css/media.css" rel="stylesheet" media="screen">
 
@@ -34,132 +34,139 @@
         <script type="text/javascript" src="js/jquery.quicksand.js"></script>
         <script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="js/prefixfree.min.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
- 
+        <script type="text/javascript" src="js/main.js"></script> 
         <script type="text/javascript">
-        App = {
-            target_on  : function(){  return document.getElementsByClassName('item active')[0].getAttribute("target-id") },
-            target_all : function(){  return document.getElementsByClassName('item') },
-            init : function(){
-                $('#echoProcess').html($('#echoProcessTemplate_1').html());
-                $('#TabsСreate').html($('#templateForm_1').html()); 
-                $("#id_2").css("text-decoration","underline");// start                 
-                $('.carousel').carousel({
-                    interval: 5000
-                }).on('slide', function (e) {
-                    // console.log(55)
-                    var xx = $(this);  
-                    $("#"+App.target_on()).css("text-decoration","underline");
-                    for (var i = App.target_all().length - 1; i >= 0; i--) {
-                          // console.log(App.target_on() , App.target_all()[i].getAttribute("target-id"))
-                          // console.log(App.target_on() == App.target_all()[i].getAttribute("target-id"))
-                        if ( App.target_on() == App.target_all()[i].getAttribute("target-id") ) {
-                            $("#"+App.target_on()).css("text-decoration","underline");
-                        } else {
-                            $("#"+ App.target_all()[i].getAttribute("target-id") ).css("text-decoration","none");
-                        } 
-                    };
-                    // console.log(2) ; 
-                });
-            } 
-        } 
+            App = {
+                target_on: function () {
+                    return document.getElementsByClassName('item active')[0].getAttribute("target-id")
+                },
+                target_all: function () {
+                    return document.getElementsByClassName('item')
+                },
+                init: function () {
+                    $('#echoProcess').html($('#echoProcessTemplate_1').html());
+                    $('#TabsСreate').html($('#templateForm_1').html());
+                    $("#id_2").css("text-decoration", "underline");// start                 
+                    $('.carousel').carousel({
+                        interval: 5000
+                    }).on('slide', function (e) {
+                        // console.log(55)
+                        // var xx = $(this);  
+                        // $("#"+App.target_on()).css("text-decoration","underline");
+                        // for (var i = App.target_all().length - 1; i >= 0; i--) {
+                        //       // console.log(App.target_on() , App.target_all()[i].getAttribute("target-id"))
+                        //       // console.log(App.target_on() == App.target_all()[i].getAttribute("target-id"))
+                        //     if ( App.target_on() == App.target_all()[i].getAttribute("target-id") ) {
+                        //         $("#"+App.target_on()).css("text-decoration","underline");
+                        //     } else {
+                        //         $("#"+ App.target_all()[i].getAttribute("target-id") ).css("text-decoration","none");
+                        //     } 
+                        // };
+                        // console.log(2) ; 
+                    });
+                }
+            }
         </script>
 
     </head>
     <body>
         <div id="banner">
             <!-- @start -->
-            <script>   
-                function mailerPost(self) { 
-                    var input = $('#mailer').serializeArray();  
+            <script>
+                function mailerPost(self) {
+                    var input = $('#mailer').serializeArray();
                     // console.log(input);
                     var i = 0;
-                    $.each( input, function( key, value ) { 
-                        if ( $("#" + value . name).attr('title') != undefined ) {  
-                            if (  "" == value.value ) {
-                                if ($("#" + value . name).attr('data-error') != undefined )
-                                    if (i == 0)  {
+                    $.each(input, function (key, value) {
+                        if ($("#" + value.name).attr('title') != undefined) {
+                            if ("" == value.value) {
+                                if ($("#" + value.name).attr('data-error') != undefined)
+                                    if (i == 0) {
                                         // alert(1);
-                                        alert($("#" + value . name).attr('data-error'));
-                                        $("#" + value . name).addClass('inputError');
+                                        alert($("#" + value.name).attr('data-error'));
+                                        $("#" + value.name).addClass('inputError');
                                         //inputfield error
                                         i = 1;
                                         return;
                                     } else {
-                                        $("#" + value . name).removeClass('inputError');
+                                        $("#" + value.name).removeClass('inputError');
                                     }
                             }
-                         
-                        } 
+
+                        }
                     });
-                    if(i == 0)  {
+                    if (i == 0) {
                         $("#loadId").html('<br /> <img src="img/loading.gif"/>');
-                        $.post('mail.php', input ,function(data) { 
-                            var d =  jQuery.parseJSON( data ); 
-                            $('#form').html(d.result); 
-                           document.getElementById('contact_frame').style.marginTop="100px";
-                        });  
-                    } 
+                        $.post('mail.php', input, function (data) {
+                            var d = jQuery.parseJSON(data);
+                            $('#form').html(d.result);
+                            document.getElementById('contact_frame').style.marginTop = "100px";
+                        });
+                    }
                 }
             </script> 
             <script id="templateForm_1" type="text/template">
-                    <!-- div id="contact_frame_top"></div -->
-                    <div id="form">
-                        <p>Доставка товаров</p>
-                         
-                        <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">
-                             <div id="input">
-                                <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
-                                <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
-                                <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
-                                <input name="town-out"  id="town-out"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город отправитель"    data-error='Укажите город отправитель, пожалуйста.' title="Город отправитель"  value="" type="text" /><br />
-                                <input name="town-in"  id="town-in"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город получатель"    data-error='Укажите город получатель, пожалуйста.' title="Город получатель"  value="" type="text" /><br /> 
-                                <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
-                                <select name="type" size="1" style="width:233px">
-                                <option value="first">авиа</option>
-                                <option selected="selected" value="second">авто</option>
-                                <option value="third">ж/д</option>
-                                <option value="fourth">море</option>
-                                </select>
-                                <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- div id="contact_frame_bottom"></div -->
+                <!-- div id="contact_frame_top"></div -->
+                <div id="form">
+                <p>Доставка товаров</p>
+
+                <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">
+                <div id="input">
+                <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
+                <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
+                <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
+                <input name="town-out"  id="town-out"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город отправитель"    data-error='Укажите город отправитель, пожалуйста.' title="Город отправитель"  value="" type="text" /><br />
+                <input name="town-in"  id="town-in"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Город получатель"    data-error='Укажите город получатель, пожалуйста.' title="Город получатель"  value="" type="text" /><br /> 
+                <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
+                <select name="type" size="1" style="width:233px">
+                <option value="first">авиа</option>
+                <option selected="selected" value="second">авто</option>
+                <option value="third">ж/д</option>
+                <option value="fourth">море</option>
+                </select>
+                <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
+                </div>
+                </form>
+                </div>
+                <!-- div id="contact_frame_bottom"></div -->
             </script>  
 
             <script id="templateForm_2" type="text/template">
-                    <!-- div id="contact_frame_top"></div -->
-                    <div id="form">
-                        <p>Поиск товаров и производителей</p>
-                        <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">    
-                            <div id="input">
-                                <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
-                                <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
-                                <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
-                                <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
-                                <textarea name="text"  id="textarea" class="inputtextfield"      onfocus = "this.classList.remove('inputError');" placeholder="Ваши комментарии к заявке"   title="Ваши комментарии к заявке"></textarea>
-                                <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- div id="contact_frame_bottom"></div -->
-            </script> 
+                <!-- div id="contact_frame_top"></div -->
+                <div id="form">
+                <p>Поиск товаров и производителей</p>
+                <form method="post" accept-charset="UTF-8" name="mailer" id="mailer">    
+                <div id="input">
+                <input name="name"  id="name"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваше имя"    data-error='Напишите Ваше имя, пожалуйста.' title="Ваше имя"  value="" type="text" /><br />
+                <input name="email" id="email" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Ваш e-mail"  data-error='Укажите, пожалуйста, Вашу электронную почту для связи.'    title="Ваш e-mail"        value="" type="text" /><br />
+                <input name="phone" id="phone" class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Телефон для связи"  data-error='Укажите, пожалуйста, Ваш номер телефона для связи.' title="Телефон для связи" value="" type="text" /><br /> 
+                <input name="product"  id="product"  class="inputfield" onfocus = "this.classList.remove('inputError');" placeholder="Наименование товара"    data-error='Напишите наименование товара, пожалуйста.' title="Наименование товара"  value="" type="text" /><br />
+                <textarea name="text"  id="textarea" class="inputtextfield"      onfocus = "this.classList.remove('inputError');" placeholder="Ваши комментарии к заявке"   title="Ваши комментарии к заявке"></textarea>
+                <span id="loadId"><input type="button"  class="buttontextfield" onclick="mailerPost(document.getElementById('mailer'))" value="отправить запрос"></span>
+                </div>
+                </form>
+                </div>
+                <!-- div id="contact_frame_bottom"></div -->
+            </script>  
+            <style>
+                .aButton{
+                    font-size: 22px;
+                    color: rgb(225, 113, 1);
+                    /* text-decoration: underline;*/
+                }
+                .aButton{cursor: pointer} 
  
- 
-
-            <style> 
                 #contact_frame {
                     width: 300px;
                     background: #e17101;
                     position: relative;
                     opacity:0.9;
                     top: 17%;
-                   /* left: 73%; */
+                    /* left: 73%; */
                     border-radius: 10px;
                     z-index: 20;
                     position: absolute; right: 20px; 
-                   /* margin-top: 100px;*/
+                    /* margin-top: 100px;*/
                 }
                 #contact_frame_top {
                     position: relative;
@@ -181,7 +188,7 @@
                     font-weight: 100;
                     border-collapse: collapse;
                 }
-                 #form p{
+                #form p{
                     color: #ffffff;
                     font-size: 17px;
                     text-align: center;
@@ -217,7 +224,7 @@
                     line-height: 25px;
                     background: #3f5a74;
                     color: #a9a9a9;
-                   /* border-collapse: collapse;*/
+                    /* border-collapse: collapse;*/
                     /* border: 1px solid #898989; */
                     border-radius: 4px;
                     padding-left: 5px;
@@ -226,45 +233,43 @@
                 }
 
                 input.inputError {
-                  border: 1px solid red;
+                    border: 1px solid red;
                 }
 
                 textarea.inputError {
-                  border: 1px solid red;
+                    border: 1px solid red;
                 }
-				.buttontextfield {
-				background: #ffffff;
-				color: #e17101;
-				display: inline-block;
-				font-family: 'Proxima Nova Rg';
-				font-size: 20px;
-				line-height: 29px;
-				padding: 7px 30px;
-				border: 3px solid;
-				border-color: #e17101;
-				border-radius: 10px;
-				margin-top:5px;
-				}
-				.buttontextfield:hover{
-				background: #e17101; 
-				color: #ffffff; 
-				border: 3px solid; 
-				border-color:#ffffff;}
-             </style>
-
-
-            <div id="contact_frame">
-        <ul class="nav nav-tabs" role="tablist" >
-          <li class="active" style="width: 151px; text-align: center;"><a href="#home" role="tab" data-toggle="tab" onclick="$('#TabsСreate').html($('#templateForm_1').html());" >ДОСТАВКА</a></li>
-          <li style="width: 149px; text-align: center;"><a style="margin-right:0;" href="#profile" role="tab" data-toggle="tab" onclick="$('#TabsСreate').html($('#templateForm_2').html());">ПОИСК</a></li> 
-        </ul> 
-        <div id="TabsСreate"></div><br />
+                .buttontextfield {
+                    background: #ffffff;
+                    color: #e17101;
+                    display: inline-block;
+                    font-family: 'Proxima Nova Rg';
+                    font-size: 20px;
+                    line-height: 29px;
+                    padding: 7px 30px;
+                    border: 3px solid;
+                    border-color: #e17101;
+                    border-radius: 10px;
+                    margin-top:5px;
+                }
+                .buttontextfield:hover{
+                    background: #e17101; 
+                    color: #ffffff; 
+                    border: 3px solid; 
+                    border-color:#ffffff;}
+                </style>
+                <div id="contact_frame">
+                <ul class="nav nav-tabs" role="tablist" >
+                    <li class="active" style="width: 151px; text-align: center;"><a href="#home" role="tab" data-toggle="tab" onclick="$('#TabsСreate').html($('#templateForm_1').html());" >ДОСТАВКА</a></li>
+                    <li style="width: 149px; text-align: center;"><a style="margin-right:0;" href="#profile" role="tab" data-toggle="tab" onclick="$('#TabsСreate').html($('#templateForm_2').html());">ПОИСК</a></li> 
+                </ul> 
+                <div id="TabsСreate"></div><br />
             </div>
             <script>
                 var use_ajax_form = true;
             </script>            
-            <!-- @end -->       
-        
+            <!-- @end -->    
+
             <div class="site-slogan">
                 <div class="slogan-inner clearfix">
                     <img src="images/logo.png" />
@@ -368,7 +373,7 @@
                         </ul>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
         <!-- END OF BANNER -->
 
@@ -377,7 +382,7 @@
                 <div class="wrapper clearfix">
                     <div class="parallax_box_1">
                         <h2><span class="text_1">В штате компании работают только высококвалифицированные логисты, менеджеры и юристы. Доверив работу профессионалам, вы сможете быть уверены, что груз будет доставлен в целости и в срок.</span></h2>
-                        
+
                         <a href="#" title="BUY THIS HTML">Оставить заявку на доставку или поиск товара</a>
                     </div>
                 </div>
@@ -385,130 +390,154 @@
         </div>
 
 
-
         <!-- структура работы -->
         <div id="process">
-        <div class="row-fluid working-process">
-                 <div id="how">
-                         <div class="wrap">
-                         <h1 class="title" style="margin: 90px 0 25px;
-font-family: 'Proxima Nova Rg';
-color: #e17101;   ">Схема работы</h1> 
-                        <div id="team__carousel" class="carousel slide" data-ride="carousel" data-interval="1000">
-                            <div class="cont" style='margin-top: 0px;  margin-bottom: 30px;'>
-                                <a  id='id_1' href="#team__carousel" role="button" data-slide="prev" style=" font-size:22px; color: #e17101;">
-                                    Доставка
-                                </a>
-                                <a  id='id_2' href="#team__carousel" role="button" data-slide="next" style=" font-size:22px;  color: #e17101; padding-left: 28px;">
-                                    Поиск товаров и услуг
-                                </a>                         
-                            </div> 
-                            
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">  <br />
-                                <div class="item active" target-id="id_1" >
-                                    <div class="cover-container">
-                                        <ul class="ul_block">
-                                            <li><span class="num">[1]</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
-                                            <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Составляем подробную смету и заключаем договор</span></span></li>
-                                            <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Доставляем груз из Китая в Россию</span></span></li>
-                                            <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Таможенное оформление</span></span></li>
-                                            <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Груз приходит к вам на склад</span></span></li>
-                                        </ul> 
-                                    </div>
-                                </div>  
-                                <div class="item" target-id="id_2" >
-                                    <div class="cover-container"> 
-                                        <ul class="ul_block">
-                                            <li><span class="num">1</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Вы подаёте заявку и получаете предварительный расчет</span></span></li>
-                                            <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Составляем подробную смету и заключаем договор</span></span></li>
-                                            <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Доставляем груз из Китая в Россию</span></span></li>
-                                            <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Таможенное оформление</span></span></li>
-                                            <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Груз приходит к вам на склад</span></span></li>
-                                        </ul>
-                                    </div>
-                                </div>  
-                            </div>
-                        <!-- Controls -->                
-                        </div>  
-                        <!-- @end   -->
+            <div class="row-fluid working-process">
+                <div id="how">
 
-                    </div>
+
+                    <div class="bs-example">
+
+                        <div class="wrap">
+                            <h1 class="title" style="margin: 90px 0 25px; font-family: 'Proxima Nova Rg'; color: #e17101;   ">Схема работы</h1> 
+                            <div>
+
+
+                                <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+
+                                    <style type="text/css">
+                                        .carousel-indicators .active {
+                                            background-color: transparent;
+                                            text-decoration : underline;
+                                            color: #e17101; 
+                                        }
+                                    </style>
+                                    <center><div  class="carousel-indicators" style=' position: inherit;  top: auto;  right: auto; z-index: 5;  margin: 0; list-style: none;' >
+
+                                            <span  data-target="#myCarousel" data-slide-to="0" class="active"   style=" font-size:22px;  color: #e17101; padding-left: 28px;"  >
+                                                Доставка              
+                                            </span>
+                                            <span data-target="#myCarousel" data-slide-to="1"    style=" font-size:22px;  color: #e17101; padding-left: 28px;"  > 
+                                                Поиск товаров и услуг
+                                            </span>
+
+                                        </div>  </center>
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner" style=" padding-top: 12px;">
+                                            
+                                        <div class="item active" target-id="id_1_" >
+                                            <div class="cover-container">
+                                                <ul class="ul_block">
+                                                    <li><span class="num">1</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Делаете заявку на поиск товара или производителя</span></span></li>
+                                                    <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Осуществляем поиск наиболее подходящих для вас вариантов</span></span></li>
+                                                    <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Согласуем детали сделки и заключаем договор</span></span></li>
+                                                    <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Отслеживаем процесс изготовление товара</span></span></li>
+                                                    <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Контроль качества готового товара</span></span></li>
+                                                    <li><span class="num">6</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Отправляем вам товар</span></span></li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="item" target-id="id_2_" >
+                                            <div class="cover-container">
+                                                <ul class="ul_block">
+                                                    <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Делаете заявку на поиск товара или производителя</span></span></li>
+                                                    <li><span class="num">2</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Осуществляем поиск наиболее подходящих для вас вариантов</span></span></li>
+                                                    <li><span class="num">3</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Согласуем детали сделки и заключаем договор</span></span></li>
+                                                    <li><span class="num">4</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Отслеживаем процесс изготовление товара</span></span></li>
+                                                    <li><span class="num">5</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Контроль качества готового товара</span></span></li>
+                                                    <li><span class="num">6</span><span class="list_cont"><span><i class="icon-ok icon-large okokok"></i>Отправляем вам товар</span></span></li>
+
+                                                </ul>
+                                            </div>
+                                        </div> 
+
+                                    </div>
+                                    <!-- Carousel nav -->
+
+                                </div>
+                            </div> 
+                        </div>
+                        <!-- Controls -->                
+                    </div>  
+                    <!-- @end   -->
+
                 </div>
             </div>
         </div>
-         
-<!-- Преимущества -->
-        <div id="service">
-            <section class="header-section">
-                <div class="wrapper header-box clearfix">
-                    <h1 class="title">Преимущества</h1>
-                    <div class="row-fluid">
-                        <ul class="parallax_box_2">
-                            <li>
-                                <div class="clearfix inner-box">
-                                    <span class="wc-dot-box"><i class="icon-rocket"></i></span>
-                                    <div class="pr-dot-text">
-                                        <p>ВСЕ СХЕМЫ ДОСТАВКИ ГРУЗА</p>
-                                    </div>
+    </div>
+
+    <!-- Преимущества -->
+    <div id="service">
+        <section class="header-section">
+            <div class="wrapper header-box clearfix">
+                <h1 class="title">Преимущества</h1>
+                <div class="row-fluid">
+                    <ul class="parallax_box_2">
+                        <li>
+                            <div class="clearfix inner-box">
+                                <span class="wc-dot-box"><i class="icon-rocket"></i></span>
+                                <div class="pr-dot-text">
+                                    <p>ВСЕ СХЕМЫ ДОСТАВКИ ГРУЗА</p>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="clearfix inner-box">
-                                    <span class="wc-dot-box"><i class="icon-resize-full"></i></span>
-                                    <div class="pr-dot-text">
-                                        <p>ЛЮБОЙ ВЕС И ОБЪЕМ</p>
-                                    </div>
-                               </div>
-                            </li>
-                            <li>
-                                <div class="clearfix inner-box">
-                                    <span class="wc-dot-box"><i class="icon-location-arrow"></i></span>
-                                    <div class="pr-dot-text">
-                                        <p>ОТСЛЕЖИВАНИЕ ГРУЗА</p>
-                                    </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix inner-box">
+                                <span class="wc-dot-box"><i class="icon-resize-full"></i></span>
+                                <div class="pr-dot-text">
+                                    <p>ЛЮБОЙ ВЕС И ОБЪЕМ</p>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="clearfix inner-box">
-                                    <span class="wc-dot-box"><i class="icon-user"></i></span>
-                                    <div class="pr-dot-text">
-                                        <p>ИНДИВИДУАЛЬНЫЙ ПОДХОД К КАЖДОМУ КЛИЕНТУ</p>
-                                    </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix inner-box">
+                                <span class="wc-dot-box"><i class="icon-location-arrow"></i></span>
+                                <div class="pr-dot-text">
+                                    <p>ОТСЛЕЖИВАНИЕ ГРУЗА</p>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="clearfix inner-box">
-                                    <span class="wc-dot-box"><i class="icon-cogs "></i></span>
-                                    <div class="pr-dot-text">
-                                        <p>ОГРОМНЫЙ ОПЫТ РАБОТЫ</p>
-                                    </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix inner-box">
+                                <span class="wc-dot-box"><i class="icon-user"></i></span>
+                                <div class="pr-dot-text">
+                                    <p>ИНДИВИДУАЛЬНЫЙ ПОДХОД К КАЖДОМУ КЛИЕНТУ</p>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="clearfix inner-box">
-                                    <span class="wc-dot-box"><i class=" icon-list"></i></span>
-                                    <div class="pr-dot-text">
-                                        <p>ОБШИРНАЯ БАЗА ПРОИЗВОДИТЕЛЕЙ ПО ВСЕЙ ЮГО-ВОСТОЧНОЙ АЗИИ</p>
-                                    </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix inner-box">
+                                <span class="wc-dot-box"><i class="icon-cogs "></i></span>
+                                <div class="pr-dot-text">
+                                    <p>ОГРОМНЫЙ ОПЫТ РАБОТЫ</p>
                                 </div>
-                            </li>                                                        
-                        </ul>
-                    </div>
-                    <div class="dot-box">
-                        <img src="images/logo-sm.png">
-                    </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clearfix inner-box">
+                                <span class="wc-dot-box"><i class=" icon-list"></i></span>
+                                <div class="pr-dot-text">
+                                    <p>ОБШИРНАЯ БАЗА ПРОИЗВОДИТЕЛЕЙ ПО ВСЕЙ ЮГО-ВОСТОЧНОЙ АЗИИ</p>
+                                </div>
+                            </div>
+                        </li>                                                        
+                    </ul>
                 </div>
-            </section>
+                <div class="dot-box">
+                    <img src="images/logo-sm.png">
+                </div>
+            </div>
+        </section>
 
-            
-        </div>
 
-        <!-- END OF SERVICE -->        
+    </div>
+
+    <!-- END OF SERVICE -->        
 
 
-        <div id="contact">
-                <div id="parallax_2" class="parallax-section">
+    <div id="contact">
+        <div id="parallax_2" class="parallax-section">
             <div class="parallax-box">
                 <div class="wrapper clearfix">
                     <div class="parallax_box_3">
@@ -518,15 +547,15 @@ color: #e17101;   ">Схема работы</h1>
                 </div>
             </div>
         </div>
-            <div class="contact-box row-fluid">
-                <div class="wrapper clearfix">
-                    <div class="address-box row-fluid">
-                        <div class="marker">
-                            <span class="icon">&#xe012;</span>
-                        </div>
-                        <p>ОФИС В ГУАНЧЖОУ</p>
+        <div class="contact-box row-fluid">
+            <div class="wrapper clearfix">
+                <div class="address-box row-fluid">
+                    <div class="marker">
+                        <span class="icon">&#xe012;</span>
                     </div>
-                    <div class="contact-frm-box clearfix">
+                    <p>ОФИС В ГУАНЧЖОУ</p>
+                </div>
+                <div class="contact-frm-box clearfix">
                     <form id="contactForm" action="" name="input" method="post">
                         <div class="row-fluid">
                             <input type="text" id="formName" class="input-box" name="name" placeholder="NAME*" value=""/>
@@ -548,62 +577,62 @@ color: #e17101;   ">Схема работы</h1>
                         <div class="row-fluid">
                             <input id="formSubmit" type="submit" class="sttyc" name="submit" value="SEND">
                         </div>
-                        </form>
-                        <h2 id="success">Email Sent Successfully</h2>
-                    </div>
-                 </div>
+                    </form>
+                    <h2 id="success">Email Sent Successfully</h2>
+                </div>
             </div>
         </div>
-        <!-- END OF CONTACT -->
+    </div>
+    <!-- END OF CONTACT -->
 
-        <footer id="footer">
-            <div class="wrapper clearfix">
-                <div class="footer-box">
-                    <img src="images/logo-sm.png" style="margin-bottom:10px;"><br/>
-                    <div class="ft-text-box">
-                        <p>TOP UNION BUSINESS & Co LTD &#169; 2007-2014</p>
-                    </div>
+    <footer id="footer">
+        <div class="wrapper clearfix">
+            <div class="footer-box">
+                <img src="images/logo-sm.png" style="margin-bottom:10px;"><br/>
+                <div class="ft-text-box">
+                    <p>TOP UNION BUSINESS & Co LTD &#169; 2007-2014</p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <div id="main-nav" class="clearfix">
-            <div class="wrapper clearfix">
-                <div class="clearfix">                    
-                    <a class="scroll siteLogo" href="#banner">
-                        <span><img src="images/logo-sm.png" />
-                        </span>
-                    </a>
-                    <ul class="navigation hidden-phone">
-                        <li><a class="scroll" href="#banner" style="margin-right:15px; color:#e17101;">Запрос</a></li>
-						<li><a class="scroll" href="#home">О нас</a></li>
-						<li><a class="scroll" href="#process">Схема работы</a></li>
-						<li><a class="scroll" href="#service">Преимущества</a></li>
-						<li><a class="scroll" href="#contact">Контакты</a></li>
-                    </ul>
-                    <div class="mini-navigation visible-phone ">
-                        <button class="btn nav-toggole" type="button">
-                            <span><i class="icon-align-justify"></i></span>
-                        </button>
-                    </div>
-                                        
-                </div>
-            </div>
-            <div class="clearfix hidden-desktop hidden-tablet">
-                <ul class="phone-menu">
-                    <li><a class="scroll" href="#banner">Запрос</a></li>
+    <div id="main-nav" class="clearfix">
+        <div class="wrapper clearfix">
+            <div class="clearfix">                    
+                <a class="scroll siteLogo" href="#banner">
+                    <span><img src="images/logo-sm.png" />
+                    </span>
+                </a>
+                <ul class="navigation hidden-phone">
+                    <li><a class="scroll" href="#banner" style="margin-right:15px; color:#e17101;">Запрос</a></li>
                     <li><a class="scroll" href="#home">О нас</a></li>
                     <li><a class="scroll" href="#process">Схема работы</a></li>
-                    <li><a class="scroll" href="#service">Услуги</a></li>
+                    <li><a class="scroll" href="#service">Преимущества</a></li>
                     <li><a class="scroll" href="#contact">Контакты</a></li>
                 </ul>
+                <div class="mini-navigation visible-phone ">
+                    <button class="btn nav-toggole" type="button">
+                        <span><i class="icon-align-justify"></i></span>
+                    </button>
+                </div>
+
             </div>
         </div>
-        <script>
-        $( document ).ready(function() {
+        <div class="clearfix hidden-desktop hidden-tablet">
+            <ul class="phone-menu">
+                <li><a class="scroll" href="#banner">Запрос</a></li>
+                <li><a class="scroll" href="#home">О нас</a></li>
+                <li><a class="scroll" href="#process">Схема работы</a></li>
+                <li><a class="scroll" href="#service">Услуги</a></li>
+                <li><a class="scroll" href="#contact">Контакты</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
             App.init();
-            console.log( "ready!" );
+            console.log("ready!");
         });
-        </script>              
-    </body>
+    </script>              
+</body>
 </html>
